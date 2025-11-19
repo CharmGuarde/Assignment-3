@@ -1,0 +1,24 @@
+<h1>All Transactions</h1>
+
+<a href="/transactions/create" class="btn btn-primary mb-3">Add Transaction</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+
+    <% transactions.forEach(t => { %>
+        <tr>
+            <td><%= t.name %></td>
+            <td><%= t.amount %></td>
+            <td><%= t.type %></td>
+            <td>
+                <a href="/transactions/edit/<%= t._id %>" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/transactions/delete/<%= t._id %>" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    <% }) %>
+</table>

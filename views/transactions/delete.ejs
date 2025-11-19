@@ -1,0 +1,7 @@
+<h1>Delete Transaction</h1>
+
+<p>Are you sure you want to delete <strong><%= transaction.name %></strong>?</p>
+
+<form action="/transactions/delete/<%= transaction._id %>" method="POST">
+    <button class="btn btn-danger">Delete</button>
+</form>

@@ -15,6 +15,9 @@ require('dotenv').config();
 // connect Mongo database
 connectDB();
 
+const transactionsRouter = require("./routes/transactions");
+app.use("/transactions", transactionsRouter);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
