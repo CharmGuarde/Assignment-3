@@ -57,25 +57,6 @@ h1, h2, h3 {
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== BUTTONS ===== */
-
-.btn {
-    border-radius: 8px;
-    padding: 10px 18px;
-}
-
-/* ===== CARDS ===== */
-
-.card {
-    border-radius: 12px;
-    border: none;
-    background: white;
-}
-
-.card.shadow {
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-}
-
 /* ===== NAVBAR ===== */
 
 .navbar-brand i {
@@ -88,12 +69,31 @@ h1, h2, h3 {
 
 /* ===== FOOTER ===== */
 
-footer {
-    margin-top: 50px;
+.footer-dark {
+    background: #212529;      /* same as navbar */
     padding: 20px 0;
-    color: #555;
-    font-size: 14px;
+    color: white !important;  /* force white text */
+    margin-top: 50px;
 }
+
+/* Force ALL links inside footer to be white */
+.footer-dark a {
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Icon spacing */
+.footer-dark a i {
+    margin-right: 6px;
+}
+
+/* Light hover effect */
+.footer-dark a:hover {
+    color: #cccccc !important;
+}
+
+
+
 
 
 /* ===== TABLES ===== */
