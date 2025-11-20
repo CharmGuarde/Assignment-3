@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
 
-const transactionSchema = new mongoose.Schema({
-    name: String,
-    category: String,
-    amount: Number,
-    type: String,
-    date: String,
-    notes: String
+const TransactionSchema = new mongoose.Schema({
+    title: { type: String, required: true },      // instead of name
+    amount: { type: Number, required: true },
+    category: { type: String, required: true },   // instead of type
 });
 
-module.exports = mongoose.model("Transaction", transactionSchema);
+module.exports = mongoose.model("Transaction", TransactionSchema);

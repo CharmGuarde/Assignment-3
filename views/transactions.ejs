@@ -1,0 +1,151 @@
+<h1 class="text-center mb-4 fw-bold">Transactions</h1>
+
+<!-- ADD TRANSACTION FORM -->
+<div class="card shadow-lg p-4 mb-5 mx-auto" style="max-width: 700px;">
+    <h4 class="mb-3">Add New Transaction</h4>
+
+    <form action="/transactions/create" method="POST" class="row g-3">
+
+        <div class="col-md-6">
+            <label class="form-label">Title</label>
+            <input name="title" class="form-control" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Amount</label>
+            <input name="amount" type="number" class="form-control" required>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-control" required>
+                <option value="Income">Income</option>
+                <option value="Food">Food</option>
+                <option value="Bills">Bills</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="col-12 d-grid">
+            <button class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Add Transaction
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- TRANSACTION LIST -->
+<div class="card shadow-lg p-4">
+    <h3 class="mb-3">Transaction History</h3>
+
+    <% if (transactions.length === 0) { %>
+        <p class="text-muted">No transactions yet.</p>
+    <% } else { %>
+
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th class="text-center" style="width: 150px;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% transactions.forEach(t => { %>
+                <tr>
+                    <td class="fw-semibold"><%= t.title %></td>
+                    <td>$<%= t.amount %></td>
+                    <td><%= t.category %></td>
+
+                    <td class="text-center">
+
+                        <!-- EDIT BUTTON -->
+                        <button 
+                            class="btn btn-warning btn-sm me-2"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal<%= t._id %>">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+
+                        <!-- DELETE BUTTON -->
+                        <button 
+                            class="btn btn-danger btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal<%= t._id %>">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+
+                        <!-- EDIT MODAL -->
+                        <div class="modal fade" id="editModal<%= t._id %>" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="/transactions/edit/<%= t._id %>" method="POST">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Transaction</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <label class="form-label">Title</label>
+                                            <input name="title" class="form-control mb-2" value="<%= t.title %>" required>
+
+                                            <label class="form-label">Amount</label>
+                                            <input name="amount" type="number" class="form-control mb-2" value="<%= t.amount %>" required>
+
+                                            <label class="form-label">Category</label>
+                                            <select name="category" class="form-control">
+                                                <option <%= t.category === "Income" ? "selected" : "" %>>Income</option>
+                                                <option <%= t.category === "Food" ? "selected" : "" %>>Food</option>
+                                                <option <%= t.category === "Bills" ? "selected" : "" %>>Bills</option>
+                                                <option <%= t.category === "Shopping" ? "selected" : "" %>>Shopping</option>
+                                                <option <%= t.category === "Other" ? "selected" : "" %>>Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-success">Save Changes</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DELETE MODAL -->
+                        <div class="modal fade" id="deleteModal<%= t._id %>" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="/transactions/delete/<%= t._id %>" method="POST">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-danger">Delete Transaction</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            Are you sure you want to delete 
+                                            <strong>"<%= t.title %>"</strong>?
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <% } %>
+</div>
