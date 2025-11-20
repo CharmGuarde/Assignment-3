@@ -89,11 +89,12 @@ h1, h2, h3 {
 /* ===== FOOTER ===== */
 
 footer {
-    margin-top: 40px;
+    margin-top: 50px;
     padding: 20px 0;
+    color: #555;
     font-size: 14px;
-    letter-spacing: 0.5px;
 }
+
 
 /* ===== TABLES ===== */
 
