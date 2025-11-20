@@ -12,6 +12,32 @@ h1, h2, h3 {
     color: #333;
 }
 
+/* === HOME PAGE BUTTONS === */
+
+.home-buttons {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.home-btn {
+    display: block;
+    width: 100%;
+    background: white;
+    color: #333;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    transition: background 0.2s;
+}
+
+.home-btn:hover {
+    background: #e6e6e6;
+}
+
+
 /* ===== BUTTONS ===== */
 
 .btn {
