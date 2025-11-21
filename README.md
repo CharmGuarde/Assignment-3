@@ -5,7 +5,7 @@ The project is used to test my knowledge on creating a web app using CRUD. I imp
 ------------------------------------------------------------------------------------------------
 
 ## Structure 
-My website has 3 links
+My website has 4 links
 1. homepage (index.ejs) - Welcome page, with 3 buttons 
 2. about (about.ejs) - Talks about the webapp and what features it has 
 3. transaction (transactions.ejs) - Add, edit, and delete transactions   
