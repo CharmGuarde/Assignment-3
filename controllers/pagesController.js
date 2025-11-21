@@ -1,3 +1,4 @@
+// renders different pages of the website 
 exports.home = (req, res) => {
     res.render("index");
 };

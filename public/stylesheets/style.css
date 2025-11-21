@@ -1,24 +1,28 @@
-/* ===== STYLING FOR ALL ===== */
+/* ------------------- STYLINH FOR ALL PAGE ------------------- */
 
+/* background gradient and font */
 body {
     background: linear-gradient(to bottom right, #a5b9e6, #1d508f);
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== HEADERS ===== */
+/* ------------------- HEADER (SUBTITLE) PAGE ------------------- */
 
+/* header styling */
 h1, h2, h3 {
     font-weight: 700;
     color: #333;
 }
 
-/* === HOME PAGE BUTTONS === */
+/* ------------------- HOME PAGE ------------------- */
 
+/* center buttons container */
 .home-buttons {
     max-width: 500px;
     margin: 0 auto;
 }
 
+/* home page buttons styling */
 .home-btn {
     display: block;
     width: 100%;
@@ -33,17 +37,20 @@ h1, h2, h3 {
     transition: background 0.2s;
 }
 
+/* hover effect for home buttons */
 .home-btn:hover {
     background: #e6e6e6;
 }
 
+/* icon spacing in home buttons */
 .home-btn i {
     margin-right: 10px;
     font-size: 20px;
 }
 
-/* === ABOUT PAGE CARD === */
+/* ------------------- ABOUT PAGE ------------------- */
 
+/* about card styling */
 .about-card {
     max-width: 800px;
     background: white;
@@ -52,48 +59,53 @@ h1, h2, h3 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* hover effect for about cards */
 .about-card:hover {
     transform: scale(1.02);
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== NAVBAR ===== */
+/* ------------------- NAVBAR ------------------- */
 
+/* navbar background color */
 .navbar-brand i {
     margin-right: 8px;
 }
 
+/* spacing between nav links */
 .nav-link {
     margin-left: 10px;
 }
 
-/* ===== FOOTER ===== */
+/* ------------------- FOOTER PAGE ------------------- */
 
+/* dark footer styling same colour as the nav bar */
 .footer-dark {
-    background: #212529;      /* same as navbar */
+    background: #212529;     
     padding: 20px 0;
-    color: white !important;  /* force white text */
+    color: white !important;  /* force white text since bootstrap overtops it */
     margin-top: 50px;
 }
 
-/* Force ALL links inside footer to be white */
+/* forces ALL links inside footer to be white */
 .footer-dark a {
     color: white !important;
     text-decoration: none;
 }
 
-/* Icon spacing */
+/* icon spacing */
 .footer-dark a i {
     margin-right: 6px;
 }
 
-/* Light hover effect */
+/* light hover effect */
 .footer-dark a:hover {
     color: #cccccc !important;
 }
 
-/* ===== CONTACT PAGE ===== */
+/* ------------------- CONTACT PAGE ------------------- */
 
+/* contact card styling */
 .contact-card {
     background: white;
     border-radius: 12px;
@@ -101,29 +113,33 @@ h1, h2, h3 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* hover effect for contact cards */
 .contact-card:hover {
     transform: scale(1.02);
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Message box as a rectangle */
+/* message box as a rectangle */
 .message-box {
     height: 140px;
     resize: none;
 }
 
-/* TRANSACTIONS PAGE */
+/* ------------------- TRANSACTIONS PAGE ------------------- */
 
+/* Transaction card styling */
 .transaction-card {
     border-radius: 12px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Hover effect for transaction cards */
 .transaction-card:hover {
     transform: scale(1.01);
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
+/* Transaction table styling */
 .transaction-list table tbody tr:hover {
     background: #eef4ff;
 }

@@ -1,35 +1,35 @@
-<h1 class="text-center mb-4 fw-bold">Transactions</h1>
+<h1 class="text-center mb-4 fw-bold">Transactions</h1> <!-- text-center mb-4 fw-bold means center aligned, margin bottom 4, font weight bold -->
 
 <!-- ADD TRANSACTION FORM -->
-<div class="card shadow-lg p-4 mb-5 mx-auto" style="max-width: 700px;">
+<div class="card shadow-lg p-4 mb-5 mx-auto" style="max-width: 700px;"> <!--card shadow-lg p-4 mb-5 mx-auto means card with large shadow, padding 4, margin bottom 5, center aligned horizontally-->
     <h4 class="mb-3">Add New Transaction</h4>
 
-    <form action="/transactions/create" method="POST" class="row g-3">
+    <form action="/transactions/create" method="POST" class="row g-3"> <!-- row g-3 means bootstrap grid row with gap 3 -->
 
-        <div class="col-md-6">
+        <div class="col-md-6"> <!-- col-md-6 means column that takes half width on medium and larger screens -->
             <label class="form-label">Title</label>
-            <input name="title" class="form-control" required>
+            <input name="title" class="form-control" required> <!-- form-control means bootstrap styled input -->
         </div>
 
         <div class="col-md-6">
-            <label class="form-label">Amount</label>
-            <input name="amount" type="number" class="form-control" required>
+            <label class="form-label">Amount</label> <!-- form-label means bootstrap styled label -->
+            <input name="amount" type="number" class="form-control" required> <!-- type="number" means only numeric input -->
         </div>
 
-        <div class="col-12">
-            <label class="form-label">Category</label>
-            <select name="category" class="form-control" required>
-                <option value="Income">Income</option>
-                <option value="Food">Food</option>
+        <div class="col-12"> <!-- col-12 means full width column -->
+            <label class="form-label">Category</label> <!-- form-label means bootstrap styled label, adds Catergory label -->
+            <select name="category" class="form-control" required> <!-- form-control means bootstrap styled select dropdown -->
+                <option value="Income">Income</option> <!-- adds option for the dropdown -->
+                <option value="Food">Food</option> 
                 <option value="Bills">Bills</option>
                 <option value="Shopping">Shopping</option>
                 <option value="Other">Other</option>
             </select>
         </div>
 
-        <div class="col-12 d-grid">
+        <div class="col-12 d-grid"> <!-- col-12 d-grid means full width column with grid display for button to take full width -->
             <button class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i> Add Transaction
+                <i class="fa-solid fa-plus"></i> Add Transaction <!-- fa-solid fa-plus means font awesome plus icon -->
             </button>
         </div>
 
@@ -37,39 +37,50 @@
 </div>
 
 <!-- TRANSACTION LIST -->
-<div class="card shadow-lg p-4">
+<div class="card shadow-lg p-4"> <!-- card shadow-lg p-4 means card with large shadow and padding 4 -->
     <h3 class="mb-3">Transaction History</h3>
 
     <% if (transactions.length === 0) { %>
         <p class="text-muted">No transactions yet.</p>
     <% } else { %>
 
-    <table class="table table-hover align-middle">
+    <!--added this ^^^ to check if there are no transactions then show a message, else show the data
+    if i dont add this, then there will be an empty table with no explanation, making the table 
+    look broken. -->    
+
+    <table class="table table-hover align-middle"> <!-- table table-hover align-middle means bootstrap styled table with hover effect and vertically centered content -->
         <thead class="table-dark">
-            <tr>
+            <tr> <!-- tr means table row -->
                 <th>Title</th>
                 <th>Amount</th>
                 <th>Category</th>
-                <th class="text-center" style="width: 150px;">Actions</th>
+                <th class="text-center" style="width: 150px;">Actions</th> <!-- text-center means center aligned, style width 150px to limit the width of the actions column -->
             </tr>
         </thead>
 
         <tbody>
-            <% transactions.forEach(t => { %>
+            <% transactions.forEach(t => { %> <!-- looping through each transaction 't' in the transactions array -->
                 <tr>
-                    <td class="fw-semibold"><%= t.title %></td>
-                    <td>$<%= t.amount %></td>
+                    <td class="fw-semibold"><%= t.title %></td> <!-- fw-semibold means font weight semi-bold -->
+                    <td>$<%= t.amount %></td> 
                     <td><%= t.category %></td>
+                    <!--^^ displays data that the user already added-->
+
 
                     <td class="text-center">
 
                         <!-- EDIT BUTTON -->
                         <button 
-                            class="btn btn-warning btn-sm me-2"
-                            data-bs-toggle="modal"
+                            class="btn btn-warning btn-sm me-2"                             data-bs-toggle="modal"
                             data-bs-target="#editModal<%= t._id %>">
                             <i class="fa-solid fa-pen"></i>
                         </button>
+
+                        <!--makes the edit button yellow
+                        adds pen to the button
+                        data-bs-toggle="modal" this opens a modal when clicked
+                        data-bs-target="#editModal<%= t._id %>" tells bootstrap which modal to open 
+                        -->
 
                         <!-- DELETE BUTTON -->
                         <button 
@@ -78,6 +89,13 @@
                             data-bs-target="#deleteModal<%= t._id %>">
                             <i class="fa-solid fa-trash"></i>
                         </button>
+
+                        <!--
+                        makes delete button red
+                        adds trash can to the button 
+                        data-bs-toggle="modal"  opens a modal when clicked
+                        data-bs-target="#deleteModal<%= t._id %>" tells bootstrap which modal to open
+                        -->
 
                         <!-- EDIT MODAL -->
                         <div class="modal fade" id="editModal<%= t._id %>" tabindex="-1">
@@ -105,6 +123,8 @@
                                                 <option <%= t.category === "Shopping" ? "selected" : "" %>>Shopping</option>
                                                 <option <%= t.category === "Other" ? "selected" : "" %>>Other</option>
                                             </select>
+                                            <!-- ^^ option mathing the transaction category that gets selected, example: if the category selected is bells then it will show the correct
+                                             category in the dropdown -->
                                         </div>
 
                                         <div class="modal-footer">
@@ -115,6 +135,20 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--
+                        <div class="modal fade" id="editModal<%= t._id %>" tabindex="-1"> creates a bootstrap modal with fade effect and unique id for each transaction
+                        modal-dialog sets the modal dialog container
+                        modal-content sets the modal content container
+                        form action="/transactions/edit/<%= t._id %>" method="POST" sets the form to submit to the edit route for the specific transaction
+                        modal-header sets the modal header container
+                        modal-title sets the modal title
+                        btn-close creates a button to close the modal
+                        modal-body sets the modal body container
+                        form-control mb-2 creates a bootstrap styled input with margin bottom 2
+                        modal-footer sets the modal footer container
+                        btn btn-success creates a green button for saving changes
+                        -->
 
                         <!-- DELETE MODAL -->
                         <div class="modal fade" id="deleteModal<%= t._id %>" tabindex="-1">
@@ -140,12 +174,19 @@
                                 </div>
                             </div>
                         </div>
+                        <!--
+                        this will create a hidden modal that has fade animation
+                        id="deleteModal<%= t._id %>" unique id for each transaction
+                        action="/transactions/delete/<%= t._id %>" method="POST" sets the form to submit to the delete route for the specific transaction
+                        -->
 
                     </td>
                 </tr>
             <% }) %>
+            <!-- ending of forEach; loops through all transactions and creates a table row for each transaction -->
         </tbody>
     </table>
 
     <% } %>
+    <!-- ending of if else statement checking if there are transactions -->
 </div>

@@ -1,15 +1,15 @@
 <div class="container mt-5">
 
-    <h1 class="text-center mb-4">Contact Me</h1>
+    <h1 class="text-center mb-4">Contact Me</h1> <!--"text-center mb-4" centers the text and adds a space below the element -->
 
-    <div class="contact-card card shadow p-4 mx-auto" style="max-width: 600px;">
+    <div class="contact-card card shadow p-4 mx-auto" style="max-width: 600px;"> <!--"contact-card card shadow p-4 mx-auto" styles the card with padding and centers it horizontally -->
 
-        <form action="/contact" method="POST">
+        <form action="/contact" method="POST"> <!-- Form to submit contact information -->
 
-            <!-- NAME -->
-            <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" id="name" name="name" class="form-control" required>
+            <!-- NAME --> 
+            <div class="mb-3"> <!--"mb-3" adds a margin below the element -->
+                <label for="name" class="form-label">Full Name</label> <!-- label for the name input field -->
+                <input type="text" id="name" name="name" class="form-control" required> <!-- input field for the name with Bootstrap styling -->
             </div>
 
             <!-- EMAIL -->
@@ -21,7 +21,7 @@
             <!-- PHONE -->
             <div class="mb-3">
                 <label for="phone" class="form-label">Phone Number</label>
-                <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{10}" placeholder="1234567890" required>
+                <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{10}" placeholder="1234567890" required> <!-- pattern ensures a 10-digit phone number -->
             </div>
 
             <!-- MESSAGE -->
@@ -31,7 +31,7 @@
             </div>
 
             <!-- SUBMIT -->
-            <button type="submit" class="btn btn-primary w-100">
+            <button type="submit" class="btn btn-primary w-100"> <!--"btn btn-primary w-100" styles the button with Bootstrap and makes it full width -->
                 <i class="fa-solid fa-paper-plane"></i> Send Message
             </button>
 
