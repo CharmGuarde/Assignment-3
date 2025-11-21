@@ -1,14 +1,15 @@
 ## Assignment-3
 ## Overview
-For our final project, we decided to create a Task Manager. For the first part of the project, we made a simple layout that helped to show what are our main goal was. 
+The project is used to test my knowledge on creating a web app using CRUD. I implemented it by making a website using resources provided in class and by searching it up on the internet. 
 
 ------------------------------------------------------------------------------------------------
 
 ## Structure 
 My website has 3 links
-1. homepage (home.ejs) - Welcome page, with 3 buttons 
-2. task (index.ejs) - Add, edit, delete, and has the list of the tasks you created  
-3. contact (contact.ejs) - How to contact us 
+1. homepage (index.ejs) - Welcome page, with 3 buttons 
+2. about (about.ejs) - Talks about the webapp and what features it has 
+3. transaction (transactions.ejs) - Add, edit, and delete transactions   
+4. contact (contact.ejs) - How to contact us 
 
 ------------------------------------------------------------------------------------------------
 
@@ -39,6 +40,13 @@ My website has 3 links
 
 ## How to run? 
 1. You can use the link I've provided in this readme file
+
+------------------------------------------------------------------------------------------------
+
+## Contact 
+Email: charmchristal.guarde@ontariotechu.net
+Phone: 416-518-8078
+
 
 
 
