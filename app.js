@@ -22,7 +22,7 @@ connectDB();
    SESSION + PASSPORT SETUP
 ---------------------------------------------------*/
 const session = require("express-session");
-const passport = require("./config/passport"); // <== you will edit this file later
+const passport = require("./config/passport");
 
 app.use(
   session({
@@ -41,16 +41,14 @@ app.use(passport.session());
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
+
+/* -------------------------------------------------
+   PROTECT CREATE / UPDATE / DELETE
+---------------------------------------------------*/
 function ensureAuth(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect("/login");
+  if (req.isAuthenticated()) return next();
+  res.redirect("/login");
 }
-
-app.get("/transactions", ensureAuth, (req, res) => {
-    res.render("transactions", { user: req.user });
-});
-
-
 
 /* -------------------------------------------------
    EXPRESS LAYOUTS CONFIG
@@ -78,21 +76,28 @@ app.use(express.static(path.join(__dirname, "public")));
 ---------------------------------------------------*/
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/transactions", transactionsRouter);
-app.get("/login", (req, res) => {
-    res.render("login");
-});
 
+// Protect CRUD inside transactions router
+app.use("/transactions", (req, res, next) => {
+  // only block CREATE, UPDATE, DELETE
+  if (["POST", "PUT", "PATCH", "DELETE"].includes(req.method)) {
+    return ensureAuth(req, res, next);
+  }
+  next();
+}, transactionsRouter);
+
+// Login page
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
 /* -------------------------------------------------
    ERROR HANDLING
 ---------------------------------------------------*/
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
