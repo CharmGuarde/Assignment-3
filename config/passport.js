@@ -1,3 +1,9 @@
+const passport = require("passport");
+const GitHubStrategy = require("passport-github2").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+require("dotenv").config();
+
+
 /* -------------------------------------------------
    GITHUB STRATEGY
 ---------------------------------------------------*/
