@@ -1,25 +1,45 @@
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
-const passport = require("../config/passport");
 
-// Redirect to GitHub for login
-router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
+/* -------------------------------------------------
+   GITHUB AUTH
+---------------------------------------------------*/
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
 
-// GitHub callback URL
-router.get("/github/callback",
+router.get(
+  "/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
   (req, res) => {
-    // Successful login
-    res.redirect("/");
+    res.redirect("/profile");
   }
 );
 
-// Logout
+/* -------------------------------------------------
+   GOOGLE AUTH
+---------------------------------------------------*/
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    res.redirect("/profile");
+  }
+);
+
+/* -------------------------------------------------
+   LOGOUT
+---------------------------------------------------*/
 router.get("/logout", (req, res) => {
   req.logout(() => {
-    req.session.destroy(() => {
-      res.redirect("/");
-    });
+    res.redirect("/");
   });
 });
 
