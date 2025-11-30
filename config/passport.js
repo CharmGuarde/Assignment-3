@@ -1,17 +1,3 @@
-const passport = require("passport");
-const GitHubStrategy = require("passport-github2").Strategy;
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-// Serialize user (store in session)
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-// Deserialize user (retrieve from session)
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
-});
-
 /* -------------------------------------------------
    GITHUB STRATEGY
 ---------------------------------------------------*/
@@ -20,7 +6,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
+      callbackURL: process.env.GITHUB_CALLBACK_URL, // <--- FIXED
     },
     (accessToken, refreshToken, profile, done) => {
       return done(null, profile);
@@ -36,12 +22,10 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: process.env.GOOGLE_CALLBACK_URL, // <--- FIXED
     },
     (accessToken, refreshToken, profile, done) => {
       return done(null, profile);
     }
   )
 );
-
-module.exports = passport;
