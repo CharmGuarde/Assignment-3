@@ -2,6 +2,7 @@
 ## Overview
 The project is used to test my knowledge on creating a web app using CRUD. I implemented it by making a website using resources provided in class and by searching it up on the internet. 
 
+I implemented a GitHub and Google authorization using passport.js 
 ------------------------------------------------------------------------------------------------
 
 ## Structure 
@@ -18,6 +19,7 @@ My website has 4 links
 2. GitHub 
 3. MongoDB Atlas
 4. Render 
+5. passport.js website 
 
 ------------------------------------------------------------------------------------------------
 
@@ -35,7 +37,8 @@ My website has 4 links
 5. Bootstrap website
 6. Render; used to deploy as live link
 7. MongoDB; used for CRUD 
-
+8. Passport.js 
+9. Reddit 
 ------------------------------------------------------------------------------------------------
 
 ## How to run? 
