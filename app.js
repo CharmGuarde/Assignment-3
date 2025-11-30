@@ -17,6 +17,23 @@ require('dotenv').config(); // load environment variables from .env file
 // connect Mongo database
 connectDB();
 
+
+const session = require("express-session");
+const passport = require("./config/passport");
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || "secret",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+const authRoutes = require("./routes/auth");
+app.use("/auth", authRoutes);
+
 // --- EXPRESS LAYOUTS SETUP ---
 app.use(expressLayouts); // use express-ejs-layouts middleware 
 app.set('layout', 'layout'); // set default layout file
