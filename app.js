@@ -1,28 +1,29 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var expressLayouts = require('express-ejs-layouts');
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+var expressLayouts = require("express-ejs-layouts");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var transactionsRouter = require('./routes/transactions');
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var transactionsRouter = require("./routes/transactions");
 
 var app = express();
 
 // Load environment variables
-require('dotenv').config();
+require("dotenv").config();
 
 // Connect MongoDB
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
 connectDB();
 
 /* -------------------------------------------------
    SESSION + PASSPORT SETUP
 ---------------------------------------------------*/
 const session = require("express-session");
-const passport = require("./config/passport");
+const passport = require("passport");      // <-- IMPORTANT
+require("./config/passport");              // <-- Loads strategies
 
 app.use(
   session({
@@ -36,22 +37,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* -------------------------------------------------
-   AUTH ROUTES (GitHub + Google)
+   AUTH ROUTES
 ---------------------------------------------------*/
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
-
 /* -------------------------------------------------
-   PROTECT CREATE / UPDATE / DELETE
+   Protect CRUD actions (POST/PUT/PATCH/DELETE)
 ---------------------------------------------------*/
 function ensureAuth(req, res, next) {
   if (req.isAuthenticated()) return next();
-  res.redirect("/login");
+  return res.redirect("/login");
 }
 
 /* -------------------------------------------------
-   EXPRESS LAYOUTS CONFIG
+   EXPRESS LAYOUTS
 ---------------------------------------------------*/
 app.use(expressLayouts);
 app.set("layout", "layout");
@@ -72,19 +72,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 /* -------------------------------------------------
-   MAIN ROUTES
+   ROUTES
 ---------------------------------------------------*/
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-// Protect CRUD inside transactions router
-app.use("/transactions", (req, res, next) => {
-  // only block CREATE, UPDATE, DELETE
-  if (["POST", "PUT", "PATCH", "DELETE"].includes(req.method)) {
-    return ensureAuth(req, res, next);
-  }
-  next();
-}, transactionsRouter);
+// Protect only the modifying requests in /transactions
+app.use(
+  "/transactions",
+  (req, res, next) => {
+    if (["POST", "PUT", "PATCH", "DELETE"].includes(req.method)) {
+      return ensureAuth(req, res, next);
+    }
+    next();
+  },
+  transactionsRouter
+);
 
 // Login page
 app.get("/login", (req, res) => {
@@ -100,7 +103,8 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.error =
+    req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
   res.render("error");
