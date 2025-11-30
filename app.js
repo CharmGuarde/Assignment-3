@@ -41,6 +41,17 @@ app.use(passport.session());
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
+function ensureAuth(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect("/login");
+}
+
+app.get("/transactions", ensureAuth, (req, res) => {
+    res.render("transactions", { user: req.user });
+});
+
+
+
 /* -------------------------------------------------
    EXPRESS LAYOUTS CONFIG
 ---------------------------------------------------*/
@@ -68,6 +79,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/transactions", transactionsRouter);
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
 
 /* -------------------------------------------------
    ERROR HANDLING
